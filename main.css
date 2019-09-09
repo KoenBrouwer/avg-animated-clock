@@ -10,7 +10,15 @@
 }
 @keyframes second-dial-in {
   from {
-    stroke-dashoffset: 436;
+    stroke-dashoffset: 440;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes minute-dial-in {
+  from {
+    stroke-dashoffset: 440;
   }
   to {
     stroke-dashoffset: 0;
@@ -61,6 +69,12 @@ svg.clock {
   width: 500px;
   height: 500px;
 }
+svg.clock g.mondaine rect.sbb-logo {
+  fill: #F00;
+}
+svg.clock g.mondaine polygon.sbb-logo {
+  fill: #FFF;
+}
 svg.clock circle {
   fill: #FFF;
 }
@@ -71,6 +85,14 @@ svg.clock circle.border {
   stroke-dasharray: 3062;
   stroke-dashoffset: 3062;
 }
+svg.clock circle.dial-seconds {
+  animation: opacity-in 750ms 1500ms forwards;
+  opacity: 0;
+  fill: #A00;
+  transform-origin: 50% 50%;
+  transition: transform 500ms;
+  transform: rotate(0deg);
+}
 svg.clock circle.center {
   animation: enter-circle-center 750ms 0ms forwards;
   transform-origin: 50% 50%;
@@ -80,74 +102,383 @@ svg.clock circle.center {
   stroke-dasharray: 251;
   stroke-dashoffset: 251;
 }
-svg.clock polygon.hourline:not(:nth-of-type(2n)) {
-  display: none;
-}
-svg.clock line.hourline {
+svg.clock g.hours line.hour {
   transition: transform 500ms 250ms, opacity 500ms 250ms;
   transform: rotate(0deg);
   opacity: 0;
   stroke: #000;
-  stroke-width: 25px;
+  stroke-width: 30px;
 }
-svg.clock line.hourline.hour-0 {
+svg.clock g.hours line.hour.hour-0 {
   transform-origin: 50% 50%;
   transform: rotate(0deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-1 {
+svg.clock g.hours line.hour.hour-1 {
   transform-origin: 50% 50%;
   transform: rotate(30deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-2 {
+svg.clock g.hours line.hour.hour-2 {
   transform-origin: 50% 50%;
   transform: rotate(60deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-3 {
+svg.clock g.hours line.hour.hour-3 {
   transform-origin: 50% 50%;
   transform: rotate(90deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-4 {
+svg.clock g.hours line.hour.hour-4 {
   transform-origin: 50% 50%;
   transform: rotate(120deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-5 {
+svg.clock g.hours line.hour.hour-5 {
   transform-origin: 50% 50%;
   transform: rotate(150deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-6 {
+svg.clock g.hours line.hour.hour-6 {
   transform-origin: 50% 50%;
   transform: rotate(180deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-7 {
+svg.clock g.hours line.hour.hour-7 {
   transform-origin: 50% 50%;
   transform: rotate(210deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-8 {
+svg.clock g.hours line.hour.hour-8 {
   transform-origin: 50% 50%;
   transform: rotate(240deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-9 {
+svg.clock g.hours line.hour.hour-9 {
   transform-origin: 50% 50%;
   transform: rotate(270deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-10 {
+svg.clock g.hours line.hour.hour-10 {
   transform-origin: 50% 50%;
   transform: rotate(300deg);
   opacity: 1;
 }
-svg.clock line.hourline.hour-11 {
+svg.clock g.hours line.hour.hour-11 {
   transform-origin: 50% 50%;
   transform: rotate(330deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min {
+  transition: transform 500ms 250ms, opacity 500ms 250ms;
+  transform: rotate(0deg);
+  opacity: 0;
+  stroke: #000;
+  stroke-width: 12px;
+}
+svg.clock g.mins line.min.min-0 {
+  transform-origin: 50% 50%;
+  transform: rotate(0deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-1 {
+  transform-origin: 50% 50%;
+  transform: rotate(6deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-2 {
+  transform-origin: 50% 50%;
+  transform: rotate(12deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-3 {
+  transform-origin: 50% 50%;
+  transform: rotate(18deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-4 {
+  transform-origin: 50% 50%;
+  transform: rotate(24deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-5 {
+  transform-origin: 50% 50%;
+  transform: rotate(30deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-6 {
+  transform-origin: 50% 50%;
+  transform: rotate(36deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-7 {
+  transform-origin: 50% 50%;
+  transform: rotate(42deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-8 {
+  transform-origin: 50% 50%;
+  transform: rotate(48deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-9 {
+  transform-origin: 50% 50%;
+  transform: rotate(54deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-10 {
+  transform-origin: 50% 50%;
+  transform: rotate(60deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-11 {
+  transform-origin: 50% 50%;
+  transform: rotate(66deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-12 {
+  transform-origin: 50% 50%;
+  transform: rotate(72deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-13 {
+  transform-origin: 50% 50%;
+  transform: rotate(78deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-14 {
+  transform-origin: 50% 50%;
+  transform: rotate(84deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-15 {
+  transform-origin: 50% 50%;
+  transform: rotate(90deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-16 {
+  transform-origin: 50% 50%;
+  transform: rotate(96deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-17 {
+  transform-origin: 50% 50%;
+  transform: rotate(102deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-18 {
+  transform-origin: 50% 50%;
+  transform: rotate(108deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-19 {
+  transform-origin: 50% 50%;
+  transform: rotate(114deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-20 {
+  transform-origin: 50% 50%;
+  transform: rotate(120deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-21 {
+  transform-origin: 50% 50%;
+  transform: rotate(126deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-22 {
+  transform-origin: 50% 50%;
+  transform: rotate(132deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-23 {
+  transform-origin: 50% 50%;
+  transform: rotate(138deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-24 {
+  transform-origin: 50% 50%;
+  transform: rotate(144deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-25 {
+  transform-origin: 50% 50%;
+  transform: rotate(150deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-26 {
+  transform-origin: 50% 50%;
+  transform: rotate(156deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-27 {
+  transform-origin: 50% 50%;
+  transform: rotate(162deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-28 {
+  transform-origin: 50% 50%;
+  transform: rotate(168deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-29 {
+  transform-origin: 50% 50%;
+  transform: rotate(174deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-30 {
+  transform-origin: 50% 50%;
+  transform: rotate(180deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-31 {
+  transform-origin: 50% 50%;
+  transform: rotate(186deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-32 {
+  transform-origin: 50% 50%;
+  transform: rotate(192deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-33 {
+  transform-origin: 50% 50%;
+  transform: rotate(198deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-34 {
+  transform-origin: 50% 50%;
+  transform: rotate(204deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-35 {
+  transform-origin: 50% 50%;
+  transform: rotate(210deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-36 {
+  transform-origin: 50% 50%;
+  transform: rotate(216deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-37 {
+  transform-origin: 50% 50%;
+  transform: rotate(222deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-38 {
+  transform-origin: 50% 50%;
+  transform: rotate(228deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-39 {
+  transform-origin: 50% 50%;
+  transform: rotate(234deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-40 {
+  transform-origin: 50% 50%;
+  transform: rotate(240deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-41 {
+  transform-origin: 50% 50%;
+  transform: rotate(246deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-42 {
+  transform-origin: 50% 50%;
+  transform: rotate(252deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-43 {
+  transform-origin: 50% 50%;
+  transform: rotate(258deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-44 {
+  transform-origin: 50% 50%;
+  transform: rotate(264deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-45 {
+  transform-origin: 50% 50%;
+  transform: rotate(270deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-46 {
+  transform-origin: 50% 50%;
+  transform: rotate(276deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-47 {
+  transform-origin: 50% 50%;
+  transform: rotate(282deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-48 {
+  transform-origin: 50% 50%;
+  transform: rotate(288deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-49 {
+  transform-origin: 50% 50%;
+  transform: rotate(294deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-50 {
+  transform-origin: 50% 50%;
+  transform: rotate(300deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-51 {
+  transform-origin: 50% 50%;
+  transform: rotate(306deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-52 {
+  transform-origin: 50% 50%;
+  transform: rotate(312deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-53 {
+  transform-origin: 50% 50%;
+  transform: rotate(318deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-54 {
+  transform-origin: 50% 50%;
+  transform: rotate(324deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-55 {
+  transform-origin: 50% 50%;
+  transform: rotate(330deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-56 {
+  transform-origin: 50% 50%;
+  transform: rotate(336deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-57 {
+  transform-origin: 50% 50%;
+  transform: rotate(342deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-58 {
+  transform-origin: 50% 50%;
+  transform: rotate(348deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-59 {
+  transform-origin: 50% 50%;
+  transform: rotate(354deg);
+  opacity: 1;
+}
+svg.clock g.mins line.min.min-60 {
+  transform-origin: 50% 50%;
+  transform: rotate(360deg);
   opacity: 1;
 }
 svg.clock line.dial {
@@ -159,20 +490,20 @@ svg.clock line.dial.second {
   animation: second-dial-in 750ms 1000ms forwards;
   stroke: #A00;
   stroke-width: 15px;
-  stroke-dasharray: 436;
-  stroke-dashoffset: 436;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
 }
 svg.clock line.dial.minute {
-  animation: second-dial-in 750ms 875ms forwards;
+  animation: minute-dial-in 750ms 875ms forwards;
   stroke: #000;
-  stroke-width: 20px;
-  stroke-dasharray: 436;
-  stroke-dashoffset: 436;
+  stroke-width: 30px;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
 }
 svg.clock line.dial.hour {
   animation: hour-dial-in 750ms 750ms forwards;
   stroke: #000;
-  stroke-width: 20px;
+  stroke-width: 30px;
   stroke-dasharray: 350;
   stroke-dashoffset: 350;
 }

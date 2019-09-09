@@ -1,16 +1,27 @@
 $(document).ready(() => {
 
-	const $hourLine = $("line.hourline");
+	const $hourLine = $("g.hours line.hour");
 	for(let i = 0; i < 12; i++){
-		let hourLine = $hourLine.clone().appendTo("svg.clock");
+		let hourLine = $hourLine.clone().appendTo("svg.clock g.hours");
 		setTimeout(() => {
 			hourLine.get(0).classList.add("hour-" + i);
 		}, 0);
 	}
+	$hourLine.remove();
 
-	const $secondsDial = $(".dial.second");
-	const $minutesDial = $(".dial.minute");
-	const $hoursDial = $(".dial.hour");
+	const $minLine = $("g.mins line.min");
+	console.log($minLine);
+	for(let i = 0; i < 60; i++){
+		let minLine = $minLine.clone().appendTo("svg.clock g.mins");
+		setTimeout(() => {
+			minLine.get(0).classList.add("min-" + i);
+		}, 0);
+	}
+	$minLine.remove();
+
+	const $secondsDial = $("line.dial.second, circle.dial-seconds");
+	const $minutesDial = $("line.dial.minute");
+	const $hoursDial = $("line.dial.hour");
 
 	const updateClock = () => {
 		const time = new Date();

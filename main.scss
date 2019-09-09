@@ -1,3 +1,17 @@
+@mixin rotateByHour($hour) {
+	$degs: ((360 / 12) * $hour);
+
+	transform-origin: 50% 50%;
+	transform: rotate($degs + deg);
+}
+
+@mixin rotateByMin($min) {
+	$degs: ((360 / 60) * $min);
+
+	transform-origin: 50% 50%;
+	transform: rotate($degs + deg);
+}
+
 @keyframes enter-circle-border {
 	from {
 		opacity: 0;
@@ -11,7 +25,16 @@
 
 @keyframes second-dial-in {
 	from {
-		stroke-dashoffset: 436;
+		stroke-dashoffset: 440;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes minute-dial-in {
+	from {
+		stroke-dashoffset: 440;
 	}
 	to {
 		stroke-dashoffset: 0;
@@ -69,6 +92,15 @@ svg.clock {
 	width: 500px;
 	height: 500px;
 
+	g.mondaine{
+		rect.sbb-logo{
+			fill: #F00;
+		}
+		polygon.sbb-logo{
+			fill: #FFF;
+		}
+	}
+
 	circle {
 		fill: #FFF;
 
@@ -80,8 +112,16 @@ svg.clock {
 			stroke-dashoffset: 3062;
 		}
 
+		&.dial-seconds{
+			animation: opacity-in 750ms 1500ms forwards;
+			opacity: 0;
+			fill: #A00;
+			transform-origin: 50% 50%;
+			transition: transform 500ms;
+			transform: rotate(0deg);
+		}
+
 		&.center {
-			//animation: opacity-in 500ms forwards;
 			animation: enter-circle-center 750ms 0ms forwards;
 			transform-origin: 50% 50%;
 
@@ -93,62 +133,69 @@ svg.clock {
 		}
 	}
 
-	polygon.hourline:not(:nth-of-type(2n)) {
-		display: none;
-	}
+	g.hours {
+		line.hour {
+			transition: transform 500ms 250ms, opacity 500ms 250ms;
+			transform: rotate(0deg);
+			opacity: 0;
 
-	@mixin rotateByHour($hour) {
-		$degs: ((360 / 12) * $hour);
-
-		transform-origin: 50% 50%;
-		transform: rotate($degs + deg);
-	}
-
-	line.hourline {
-		transition: transform 500ms 250ms, opacity 500ms 250ms;
-		transform: rotate(0deg);
-		opacity: 0;
-
-		@for $i from 0 through 11 {
-			&.hour-#{$i} {
-				@include rotateByHour($i);
-				opacity: 1;
+			@for $i from 0 through 11 {
+				&.hour-#{$i} {
+					@include rotateByHour($i);
+					opacity: 1;
+				}
 			}
+
+			stroke: #000;
+			stroke-width: 30px;
+		}
+	}
+
+	g.mins {
+		line.min {
+			transition: transform 500ms 250ms, opacity 500ms 250ms;
+			transform: rotate(0deg);
+			opacity: 0;
+
+			@for $i from 0 through 60 {
+				&.min-#{$i} {
+					@include rotateByMin($i);
+					opacity: 1;
+				}
+			}
+
+			stroke: #000;
+			stroke-width: 12px;
+		}
+	}
+
+	line.dial {
+		fill: #000;
+		transform-origin: 50% 50%;
+		transition: transform 500ms;
+
+		&.second {
+			animation: second-dial-in 750ms 1000ms forwards;
+			stroke: #A00;
+			stroke-width: 15px;
+			stroke-dasharray: 440;
+			stroke-dashoffset: 440;
 		}
 
-		stroke: #000;
-		stroke-width: 25px;
-	}
+		&.minute {
+			animation: minute-dial-in 750ms 875ms forwards;
+			stroke: #000;
+			stroke-width: 30px;
+			stroke-dasharray: 440;
+			stroke-dashoffset: 440;
+		}
 
-	line {
-		&.dial {
-			fill: #000;
-			transform-origin: 50% 50%;
-			transition: transform 500ms;
-
-			&.second {
-				animation: second-dial-in 750ms 1000ms forwards;
-				stroke: #A00;
-				stroke-width: 15px;
-				stroke-dasharray: 436;
-				stroke-dashoffset: 436;
-			}
-
-			&.minute {
-				animation: second-dial-in 750ms 875ms forwards;
-				stroke: #000;
-				stroke-width: 20px;
-				stroke-dasharray: 436;
-				stroke-dashoffset: 436;
-			}
-
-			&.hour {
-				animation: hour-dial-in 750ms 750ms forwards;
-				stroke: #000;
-				stroke-width: 20px;
-				stroke-dasharray: 350;
-				stroke-dashoffset: 350;
-			}
+		&.hour {
+			animation: hour-dial-in 750ms 750ms forwards;
+			stroke: #000;
+			stroke-width: 30px;
+			stroke-dasharray: 350;
+			stroke-dashoffset: 350;
 		}
 	}
 
