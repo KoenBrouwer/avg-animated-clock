@@ -1,0 +1,155 @@
+@keyframes enter-circle-border {
+	from {
+		opacity: 0;
+		stroke-dashoffset: 3062;
+	}
+	to {
+		opacity: 1;
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes second-dial-in {
+	from {
+		stroke-dashoffset: 436;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes hour-dial-in {
+	from {
+		stroke-dashoffset: 350;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes enter-circle-center {
+	from {
+		stroke-dashoffset: 251;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes enter-clock {
+	0% {
+		transform: scale(0, 0);
+	}
+	100% {
+		transform: scale(1, 1);
+	}
+}
+
+@keyframes opacity-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes dials-in {
+	0% {
+		stroke-dashoffset: 1000;
+	}
+	100% {
+		stroke-dashoffset: 0;
+	}
+}
+
+svg.clock {
+	filter: blur(0.1px);
+
+	width: 500px;
+	height: 500px;
+
+	circle {
+		fill: #FFF;
+
+		&.border {
+			opacity: 0;
+			animation: enter-clock 500ms forwards, enter-circle-border 750ms 1500ms forwards;
+			stroke: #000;
+			stroke-dasharray: 3062;
+			stroke-dashoffset: 3062;
+		}
+
+		&.center {
+			//animation: opacity-in 500ms forwards;
+			animation: enter-circle-center 750ms 0ms forwards;
+			transform-origin: 50% 50%;
+
+			fill: #FFF;
+			stroke: #A00;
+			stroke-width: 20px;
+			stroke-dasharray: 251;
+			stroke-dashoffset: 251;
+		}
+	}
+
+	polygon.hourline:not(:nth-of-type(2n)) {
+		display: none;
+	}
+
+	@mixin rotateByHour($hour) {
+		$degs: ((360 / 12) * $hour);
+
+		transform-origin: 50% 50%;
+		transform: rotate($degs + deg);
+	}
+
+	line.hourline {
+		transition: transform 500ms 250ms, opacity 500ms 250ms;
+		transform: rotate(0deg);
+		opacity: 0;
+
+		@for $i from 0 through 11 {
+			&.hour-#{$i} {
+				@include rotateByHour($i);
+				opacity: 1;
+			}
+		}
+
+		stroke: #000;
+		stroke-width: 25px;
+	}
+
+	line {
+		&.dial {
+			fill: #000;
+			transform-origin: 50% 50%;
+			transition: transform 500ms;
+
+			&.second {
+				animation: second-dial-in 750ms 1000ms forwards;
+				stroke: #A00;
+				stroke-width: 15px;
+				stroke-dasharray: 436;
+				stroke-dashoffset: 436;
+			}
+
+			&.minute {
+				animation: second-dial-in 750ms 875ms forwards;
+				stroke: #000;
+				stroke-width: 20px;
+				stroke-dasharray: 436;
+				stroke-dashoffset: 436;
+			}
+
+			&.hour {
+				animation: hour-dial-in 750ms 750ms forwards;
+				stroke: #000;
+				stroke-width: 20px;
+				stroke-dasharray: 350;
+				stroke-dashoffset: 350;
+			}
+		}
+	}
+
+}
